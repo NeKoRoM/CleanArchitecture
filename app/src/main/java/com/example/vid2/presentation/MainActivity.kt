@@ -3,6 +3,7 @@ package com.example.vid2.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.vid2.data.repository.UserRepositoryImpl
@@ -23,13 +24,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =  ActivityMainBinding.inflate(layoutInflater)
 
+        mainVM.resultLiveData.observe(this) {
+            binding.dataTextView.text = it
+
+        }
+
         setContentView(binding.root)
         binding.sendButton.setOnClickListener {
 
-            binding.dataTextView.text = mainVM.save(binding.dataEditText.text.toString())
+            mainVM.save(binding.dataEditText.text.toString())
         }
         binding.receiveButton.setOnClickListener {
-            binding.dataTextView.text = mainVM.load()
+             mainVM.load()
         }
 
     }
