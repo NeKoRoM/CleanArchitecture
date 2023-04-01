@@ -13,10 +13,11 @@ import com.example.vid2.databinding.ActivityMainBinding
 import com.example.vid2.domain.models.SaveUserNameParam
 import com.example.vid2.domain.usecase.GetUserNameUseCase
 import com.example.vid2.domain.usecase.SaveUserNameUseCase
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    val mainVM: MainVM by viewModels { MainVMFactory(this) }
+    val mainVM by viewModel<MainVM>()      // { MainVMFactory(this) }
 
 
     private lateinit var binding: ActivityMainBinding
